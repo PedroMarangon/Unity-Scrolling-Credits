@@ -1,6 +1,6 @@
 {
   "name": "com.pedrommarangon.scrollingcredits",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Scrolling Credits",
   "description": "Adds a scrolling credits canvas that reads from a text file, alongside a editor window to easily create the credits file.",
   "unity": "6000.0",

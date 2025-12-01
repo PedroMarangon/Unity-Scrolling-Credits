@@ -31,7 +31,7 @@ namespace ScrollingCreditsScreen
 
 		[Header("Settings")]
 		[Range(0, 5), SerializeField] private float startWaitTime = 1f;
-		[SerializeField] private float scrollDuration = 5;
+		[SerializeField] private float scrollDuration = 10;
 		[Space]
 		[Tooltip(TOOLTIP_CREDITS_TEXT), SerializeField] private TextAsset creditsTextAsset;
 		[SerializeField] private UnityEvent OnCreditsEnded;
@@ -60,16 +60,14 @@ namespace ScrollingCreditsScreen
 		private void OnValidate()
 		{
 			if (Application.isPlaying) return;
-
-			if(backgroundImage != null) backgroundImage.sprite = backgroundSprite;
-			if(darkeningImage != null) darkeningImage.color = darkeningColor;
-
-			if(gameTitle != null) gameTitle.color = gameTitleColor;
-			if(role != null) role.color = roleColor;
-			if(people != null) people.color = personColor;
+			SetupGraphics();
 		}
 
-		private void Awake() => SetupTextMeshProObjects();
+		private void Awake()
+		{
+			SetupTextMeshProObjects();
+			SetupGraphics();
+		}
 
 		private void Start()
 		{
@@ -115,6 +113,18 @@ namespace ScrollingCreditsScreen
 		}
 
 
+
+		private void SetupGraphics()
+		{
+			if (backgroundImage != null) backgroundImage.sprite = backgroundSprite;
+			if (darkeningImage != null) darkeningImage.color = darkeningColor;
+
+			if (gameTitle != null) gameTitle.color = gameTitleColor;
+			if (role != null) role.color = roleColor;
+			if (people != null) people.color = personColor;
+		}
+
+
 		private void SetupTextMeshProObjects()
 		{
 
@@ -151,20 +161,20 @@ namespace ScrollingCreditsScreen
 
 			foreach (string line in lines)
 			{
-				string actualLine = line.Substring(ACTUAL_LINE_START);
+				if (line.Length <= IDENTIFIER_INDEX) continue;
 
 				switch (line[IDENTIFIER_INDEX])
 				{
 					case GAME_TITLE_IDENTIFIER:
-						gameTitleText = actualLine;
+						gameTitleText = line.Substring(ACTUAL_LINE_START);
 						break;
 					case ROLE_IDENTIFIER:
-						roleText += $"{actualLine}{LINE_BREAK}";
+						roleText += $"{line.Substring(ACTUAL_LINE_START)}{LINE_BREAK}";
 						peopleText += LINE_BREAK;
 						break;
 					case PERSON_IDENTIFIER:
 						roleText += LINE_BREAK;
-						peopleText += $"{actualLine}{LINE_BREAK}";
+						peopleText += $"{line.Substring(ACTUAL_LINE_START)}{LINE_BREAK}";
 						break;
 					case LINE_BREAK_IDENTIFIER:
 						peopleText += LINE_BREAK;

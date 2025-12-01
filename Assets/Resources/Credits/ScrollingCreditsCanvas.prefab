@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startWaitTime: 1
-  scrollDuration: 5
+  scrollDuration: 10
   creditsTextAsset: {fileID: 0}
   OnCreditsEnded:
     m_PersistentCalls:
