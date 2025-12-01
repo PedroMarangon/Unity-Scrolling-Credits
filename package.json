@@ -1,0 +1,11 @@
+{
+  "name": "com.pedrommarangon.scrollingcredits",
+  "version": "1.0.0",
+  "displayName": "Scrolling Credits",
+  "description": "Adds a scrolling credits canvas that reads from a text file, alongside a editor window to easily create the credits file.",
+  "unity": "6000.0",
+  "author": {
+    "name": "Pedro Machado Marangon",
+    "url": "https://github.com/PedroMarangon/"
+  }
+}
